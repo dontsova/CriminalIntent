@@ -1,5 +1,6 @@
 package com.grayhound.CriminalIntent;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ public class Crime {
     public Crime(){
         mId = UUID.randomUUID();
         mDate = new Date();
+
     }
 
     public UUID getId() {
