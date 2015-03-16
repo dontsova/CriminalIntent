@@ -42,7 +42,6 @@ public class CrimeLab {
             if (c.getId().equals(id))
                 return c;
         }
-
         return null;
     }
 }

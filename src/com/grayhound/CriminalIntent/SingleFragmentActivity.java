@@ -1,14 +1,15 @@
 package com.grayhound.CriminalIntent;
 
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-public class CrimeActivity extends FragmentActivity{
-
-
+/**
+ * Created by slava on 16.03.15.
+ */
+public abstract class SingleFragmentActivity extends FragmentActivity {
+    protected abstract Fragment createFragment();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -16,13 +17,11 @@ public class CrimeActivity extends FragmentActivity{
         setContentView(R.layout.activity_fragment);
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-
-        if(fragment == null){
-            fragment = new CrimeFragment();
+        if (fragment == null) {
+            fragment = createFragment();
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment)
                     .commit();
         }
     }
-
 }
