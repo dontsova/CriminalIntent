@@ -1,27 +1,22 @@
 package com.grayhound.CriminalIntent;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by slava on 11.03.15.
- */
 public class Crime {
-
     private UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
 
-    public Crime(){
+    public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();
-
     }
 
-    public UUID getId() {
-        return mId;
+    @Override
+    public String toString() {
+        return mTitle;
     }
 
     public String getTitle() {
@@ -32,12 +27,8 @@ public class Crime {
         mTitle = title;
     }
 
-    public Date getDate() {
-        return mDate;
-    }
-
-    public void setDate(Date date) {
-        mDate = date;
+    public UUID getId() {
+        return mId;
     }
 
     public boolean isSolved() {
@@ -47,4 +38,14 @@ public class Crime {
     public void setSolved(boolean solved) {
         mSolved = solved;
     }
+
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
+    }
+
+
 }
