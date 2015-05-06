@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">НакосячилПолучи</string>
+    <string name="date_picker_title">Установка даты</string>
     <string name="title_activity_crime">Проступки</string>
     <string name="crime_title_hint">Что стряслось?</string>
     <string name="crime_title_label">Название</string>

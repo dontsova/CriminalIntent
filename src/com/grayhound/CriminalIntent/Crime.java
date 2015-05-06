@@ -19,6 +19,7 @@ public class Crime {
         return mTitle;
     }
 
+
     public String getTitle() {
         return mTitle;
     }

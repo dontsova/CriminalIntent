@@ -1,6 +1,7 @@
 package com.grayhound.CriminalIntent;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import android.content.Context;
 
@@ -31,5 +32,12 @@ public class CrimeLab {
     public ArrayList<Crime> getCrimes() {
         return mCrimes;
     }
+
+    public Crime getCrime(UUID id){
+        for ( Crime c : mCrimes){
+            if ( c.getId().equals(id))
+                return c;
+        }
+        return null; }
 }
 
