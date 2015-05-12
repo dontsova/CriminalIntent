@@ -8,4 +8,7 @@
     <string name="crime_details_label">Детали</string>
     <string name="crime_solved_label">Уже наказан?</string>
     <string name="crimes_title">Преступления</string>
+
+    ///!!!
+    <string name="change_time">Change the time</string>
 </resources>

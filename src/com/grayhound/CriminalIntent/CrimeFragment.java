@@ -44,7 +44,9 @@ public class CrimeFragment extends Fragment {
     }
 
     public void updateDate(){
-        mDateButton.setText(mCrime.getDate().toString());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
+        mDateButton.setText(dateFormat.format(mCrime.getDate()));
     }
 
     @Override
@@ -94,7 +96,7 @@ public class CrimeFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
-                setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialog.show(fm, DIALOG_DATE);
             }
         });

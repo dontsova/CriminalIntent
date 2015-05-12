@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  */
 public class DatePickerFragment extends DialogFragment {
     public static final String EXTRA_DATE =
-            "com.greyhound.criminalinntent.date";
+            "com.greyhound.criminalintent.date";
 
     private Date mDate;
 
