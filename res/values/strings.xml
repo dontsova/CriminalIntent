@@ -11,4 +11,10 @@
 
     <string name="change_time">Change the time</string>
     <string name="time_picker_title">Время</string>
+
+    <string name="new_crime">Новый косяк</string>
+    <string name="show_subtitles">Вкл.субтитры</string>
+    <string name="hide_subtitles">Выкл. субтитры</string>
+    <string name="subtitles">Если что увидишь - говори.</string>
+    <string name="delete_crime">Удалить косяк)</string>
 </resources>
