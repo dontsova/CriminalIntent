@@ -17,4 +17,6 @@
     <string name="hide_subtitles">Выкл. субтитры</string>
     <string name="subtitles">Если что увидишь - говори.</string>
     <string name="delete_crime">Удалить косяк)</string>
+
+    <string name="take">Клац!</string>
 </resources>
