@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,27 +15,27 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.*;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
 public class CrimeFragment extends Fragment {
+    private static final String TAG = "CrimeFragment";
     public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
     private static final String DIALOG_DATE = "date";
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_PHOTO = 1;
 
-    Crime mCrime;
-    EditText mTitleField;
-    Button mDateButton;
-    CheckBox mSolvedCheckBox;
-    ImageButton mPhotoButton;
+    private Crime mCrime;
+    private EditText mTitleField;
+    private Button mDateButton;
+    private CheckBox mSolvedCheckBox;
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -112,9 +113,11 @@ public class CrimeFragment extends Fragment {
             public void onClick(View v) {
                 // launch the camera activity
                 Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
-                startActivity(i);
+                startActivityForResult(i, REQUEST_PHOTO);
             }
         });
+
+        mPhotoView = (ImageView)v.findViewById(R.id.crime_imageView);
 
         // if camera is not available, disable camera functionality
         PackageManager pm = getActivity().getPackageManager();
@@ -126,13 +129,44 @@ public class CrimeFragment extends Fragment {
         return v;
     }
 
+    private void showPhoto() {
+        Photo p = mCrime.getPhoto();
+        BitmapDrawable b = null;
+        if (p != null) {
+            String path = getActivity()
+                    .getFileStreamPath(p.getFilename()).getAbsolutePath();
+            b = PictureUtils.getScaledDrawable(getActivity(), path);
+        }
+        mPhotoView.setImageDrawable(b);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        showPhoto();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        PictureUtils.cleanImageView(mPhotoView);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
+
         if (requestCode == REQUEST_DATE) {
             Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+        } else if (requestCode == REQUEST_PHOTO) {
+            String filename = data.getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
+            if (filename != null) {
+                Photo p = new Photo(filename);
+                mCrime.setPhoto(p);
+                showPhoto();
+            }
         }
     }
 

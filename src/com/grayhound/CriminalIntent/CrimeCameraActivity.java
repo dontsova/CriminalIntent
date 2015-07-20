@@ -9,6 +9,7 @@ import android.view.WindowManager;
  * Created by admin on 16.07.2015.
  */
 public class CrimeCameraActivity extends SingleFragmentActivity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
