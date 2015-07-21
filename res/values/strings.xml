@@ -19,4 +19,14 @@
     <string name="delete_crime">Удалить косяк)</string>
 
     <string name="take">Клац!</string>
+    <string name="crime_suspect_text">Подозреваемый</string>
+    <string name="crime_report_text">Отправить рапорт</string>
+
+    <string name="crime_report">%1$s! обнаружен в %2$s. %3$s, и %4$s.</string>
+    <string name="crime_report_solved">Дело раскрыто!</string>
+    <string name="crime_report_unsolved">Дело не раскрыто</string>
+    <string name="crime_report_no_suspect">Подозреваемый отсуствует</string>
+    <string name="crime_report_suspect">Подозреваемый %s</string>
+    <string name="crime_report_subject">Рапорт отчета</string>
+    <string name="send_report">Отправить Отчет</string>
 </resources>

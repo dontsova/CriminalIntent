@@ -1,5 +1,6 @@
 package com.grayhound.CriminalIntent;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -59,7 +61,8 @@ public class CrimeFragment extends Fragment {
     }
 
     public void updateDate() {
-        mDateButton.setText(mCrime.getDate().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
+        mDateButton.setText(dateFormat.format(mCrime.getDate()));
     }
 
     @Override
@@ -155,6 +158,29 @@ public class CrimeFragment extends Fragment {
         mPhotoView.setImageDrawable(b);
     }
 
+    private String getCrimeReport() {
+        String solvedString = null;
+        if (mCrime.isSolved()) {
+            solvedString = getString(R.string.crime_report_solved);
+        } else {
+            solvedString = getString(R.string.crime_report_unsolved);
+        }
+
+        String dateFormat = "EEE, MMM dd";
+        String dateString = DateFormat.format(dateFormat, mCrime.getDate()).toString();
+
+        String suspect = mCrime.getSuspect();
+        if (suspect == null) {
+            suspect = getString(R.string.crime_report_no_suspect);
+        } else {
+            suspect = getString(R.string.crime_report_suspect, suspect);
+        }
+        String report = getString(R.string.crime_report,
+                mCrime.getTitle(), dateString, solvedString, suspect);
+        return report;
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -164,7 +190,9 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        PictureUtils.cleanImageView(mPhotoView);
+
+            PictureUtils.cleanImageView(mPhotoView);
+
     }
 
     @Override
